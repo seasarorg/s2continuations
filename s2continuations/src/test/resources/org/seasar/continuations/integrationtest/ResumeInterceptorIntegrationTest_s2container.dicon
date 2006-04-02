@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE components PUBLIC "-//SEASAR2.1//DTD S2Container//EN"
+	"http://www.seasar.org/dtd/components21.dtd">
+<components>
+	<component
+	  instance="prototype"
+	  class="org.seasar.continuations.classloader.ContinuableClassLoader">
+		<arg>continuationConfig</arg>
+		<arg>@Thread@currentThread().getContextClassLoader()</arg>
+	</component>
+	<component name="continuationConfig" class="org.seasar.continuations.config.impl.S2ContinuationConfig">
+		<property name="entryMethod">"execute()Ljava/lang/String;"</property>
+        <initMethod name="addPattern">
+          <arg>"org.seasar.continuations.sample.impl.*"</arg>
+        </initMethod>
+        <initMethod name="init"/>
+	</component>
+
+<!--
+	<component class="org.seasar.continuations.extension.ContinuableAssemblerProvider" />
+-->
+</components>

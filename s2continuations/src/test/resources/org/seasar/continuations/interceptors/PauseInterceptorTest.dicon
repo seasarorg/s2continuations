@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE components PUBLIC "-//SEASAR//DTD S2Container 2.4//EN"
+	"http://www.seasar.org/dtd/components24.dtd">
+<components>
+	<component name="pauseInterceptor" class="org.seasar.continuations.interceptors.PauseInterceptor" />
+	<component name="continuationsInterType" class="org.seasar.continuations.intertype.ContinuableObjectInterType" />
+	<component class="org.seasar.continuations.helper.impl.ContinuableObjectResumeHelperImpl" />
+
+	<component name="sample" class="org.seasar.continuations.sample.impl.PlainInterfaceImpl" instance="prototype">
+		<meta name="continuable">true</meta>
+		<interType>continuationsInterType</interType>
+		<aspect pointcut="execute">pauseInterceptor</aspect>
+	</component>
+
+    <component name="mock" class="org.seasar.framework.aop.interceptors.MockInterceptor">
+      <initMethod name="setReturnValue">
+        <arg>"getContextOrNull"</arg>
+        <arg>null</arg>
+      </initMethod>
+    </component>
+
+	<component class="org.seasar.continuations.registry.ContinuationContextRegistry">
+	    <aspect>mock</aspect>
+	</component>
+</components>

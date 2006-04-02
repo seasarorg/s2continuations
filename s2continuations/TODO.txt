@@ -1,0 +1,3 @@
+- call/answer
+- Extract ContinuationContext static access to Component
+- BAD -> not resumed. maybe no AssemblerProxy or ResumeInterceptor

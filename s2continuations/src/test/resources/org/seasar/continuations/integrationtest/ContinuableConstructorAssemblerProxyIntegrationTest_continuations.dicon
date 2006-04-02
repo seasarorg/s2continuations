@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE components PUBLIC "-//SEASAR//DTD S2Container 2.4//EN"
+	"http://www.seasar.org/dtd/components24.dtd">
+<components namespace="continuations">
+	<include path="aop.dicon"/>
+
+	<component name="interceptor" class="org.seasar.continuations.interceptors.PauseInterceptor">
+		<aspect>aop.traceInterceptor</aspect>
+	</component>
+	<component name="interType" class="org.seasar.continuations.intertype.ContinuableObjectInterType">
+	</component>
+	<component class="org.seasar.continuations.helper.impl.ContinuableObjectResumeHelperImpl">
+		<aspect>aop.traceInterceptor</aspect>
+	</component>
+	<component class="org.seasar.continuations.registry.impl.ContinuationContextRegistryImpl">
+		<aspect>aop.traceInterceptor</aspect>
+	</component>
+	<component name="continuationManager" class="com.uwyn.rife.continuations.ContinuationManager" />
+
+<!-- notice: 
+     "session" scope is highly recommended in production.
+     "singleton" is just for JUnit testing purpose.
+	<component
+		class="org.seasar.continuations.registry.impl.SerializableContextIdMapImpl"
+		instance="session">
+	</component>
+-->
+	<component
+		class="org.seasar.continuations.registry.impl.SerializableContextIdMapImpl"
+		instance="singleton">
+	</component>
+
+</components>

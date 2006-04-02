@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE components PUBLIC "-//SEASAR//DTD S2Container 2.4//EN"
+	"http://www.seasar.org/dtd/components24.dtd">
+<components>
+	<include path="org/seasar/continuations/integrationtest/ResumeInterceptorIntegrationTest_continuations.dicon"/>
+	
+    <component name="sampleFactory" class="org.seasar.continuations.integrationtest.SampleObjectFactory">
+        <aspect pointcut="create">
+            <component class="org.seasar.continuations.interceptors.ResumeInterceptor">
+		        <property name="componentKeyArgumentIndex">0</property>
+	        </component>
+        </aspect>
+    </component>
+    
+	<component name="sample" class="org.seasar.continuations.sample.impl.PlainInterfaceImpl" instance="prototype">
+		<meta name="continuable">true</meta>
+		<interType>continuations.interType</interType>
+		<aspect pointcut="execute">continuations.interceptor</aspect>
+		<aspect>aop.traceInterceptor</aspect>
+	</component>
+</components>

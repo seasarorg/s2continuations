@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE components PUBLIC "-//SEASAR//DTD S2Container 2.4//EN"
+	"http://www.seasar.org/dtd/components24.dtd">
+<components>
+	<component name="continuableSample" class="org.seasar.continuations.sample.impl.PlainInterfaceImpl" instance="prototype">
+		<meta name="continuable">true</meta>
+	</component>
+
+	<component name="nonContinuableSample" class="org.seasar.continuations.sample.impl.PlainInterface2Impl" instance="prototype">
+	</component>
+
+    <component name="mock" class="org.seasar.framework.aop.interceptors.MockInterceptor">
+      <initMethod name="setReturnValue">
+        <arg>"resumeOrCreateNew"</arg>
+        <arg>null</arg>
+      </initMethod>
+    </component>
+
+	<component class="org.seasar.continuations.helper.ContinuableObjectResumeHelper">
+	    <aspect>mock</aspect>
+	</component>
+</components>
